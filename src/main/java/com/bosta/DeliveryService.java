@@ -46,6 +46,8 @@ class DeliveryService {
 				   .header("Authorization", apiKey)
 				   .POST(BodyPublishers.ofString(delivery.toString()))
 				   .build();
+			System.out.print("REQUEST");
+			System.out.print(request);
 			
 			HttpResponse<String> response = 
 					client.send(request, BodyHandlers.ofString());
