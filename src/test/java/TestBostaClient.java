@@ -1,5 +1,6 @@
 import org.testng.annotations.Test;
 
+
 import com.bosta.BostaClient;
 
 public class TestBostaClient {
@@ -8,5 +9,10 @@ public class TestBostaClient {
 	@Test
 	public void testBostaClient() {
 		client.getDelivery("2774255");
+		// Receiver receiver = new Receiver.Builder("first name", "last name", "01010187373").build();
+		// Delivery delivery = new Delivery.Builder(10, 500, receiver).build();
+		
+		// client.createDelivery(delivery);
 	}
+
 }
