@@ -1,6 +1,6 @@
 package com.bosta;
 
-import com.bosta.dto.delivery.Delivery;
+import com.bosta.request.delivery.Delivery;
 
 public class BostaClient {
 	String apiKey;

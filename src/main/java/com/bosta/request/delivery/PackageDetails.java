@@ -1,6 +1,6 @@
-package com.bosta.dto.delivery;
+package com.bosta.request.delivery;
 
-import com.bosta.dto.delivery.Receiver.Builder;
+import com.bosta.request.delivery.Receiver.Builder;
 
 public class PackageDetails {
 	private int itemsCount;

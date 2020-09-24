@@ -1,8 +1,10 @@
 
-package com.bosta.dto.delivery;
+package com.bosta.request.delivery;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+
+import com.bosta.enums.DeliveryType;
 
 public class Delivery {
 
@@ -16,7 +18,7 @@ public class Delivery {
 	private String webhookUrl;
 
 	private Delivery(Builder builder) {
-		this.type = builder.type;
+		this.type = builder.type.getValue();
 		this.specs = builder.specs;
 		this.notes = builder.notes;
 		this.cod = builder.cod;
@@ -27,7 +29,7 @@ public class Delivery {
 	}
 
 	public static final class Builder {
-		private int  type;
+		private DeliveryType  type;
 		private Specs specs;
 		private String notes;
 		private float cod;
@@ -36,7 +38,7 @@ public class Delivery {
 		private Receiver receiver;
 		private String webhookUrl;
 
-		public Builder(int type, float cod, Receiver receiver) { // The mandatory parameters are set here
+		public Builder(DeliveryType type, float cod, Receiver receiver) { // The mandatory parameters are set here
 			this.type = type;
 			this.cod = cod;
 			this.receiver = receiver;

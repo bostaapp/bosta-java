@@ -7,9 +7,9 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 
-import com.bosta.dto.delivery.Delivery;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.bosta.request.delivery.Delivery;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -27,7 +27,7 @@ class DeliveryService {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"http://localhost:3000/api/v0/deliveries/%s", 
+							"https://stg-app.bosta.co/api/v1/deliveries/%s", 
 							trackingNumber)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
@@ -51,7 +51,7 @@ class DeliveryService {
 			String requestBody = objectMapper
 					.writeValueAsString(delivery);
 			HttpRequest request = HttpRequest.newBuilder(
-					URI.create("http://localhost:3000/api/v0/deliveries"))
+					URI.create("https://stg-app.bosta.co/api/v1/deliveries"))
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")
 					.header("Authorization", apiKey)

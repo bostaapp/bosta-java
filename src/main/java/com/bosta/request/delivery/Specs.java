@@ -1,4 +1,4 @@
-package com.bosta.dto.delivery;
+package com.bosta.request.delivery;
 
 
 public class Specs {
