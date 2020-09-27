@@ -14,7 +14,8 @@ public class TestBostaClient {
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
-		// client.getDelivery("6849119");
+		client.getDelivery("6849119");
+		/*
 		Receiver receiver = new Receiver
 				.Builder("first name", "last name", "01010187373").build();
 		PackageDetails packageDetails = new PackageDetails.Builder()
@@ -43,7 +44,12 @@ public class TestBostaClient {
 				.webhookUrl("https://www.google.com/")
 				.build();
 		
-		client.createDelivery(delivery);
+		try {
+			client.createDelivery(delivery);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		*/
 	}
 
 }

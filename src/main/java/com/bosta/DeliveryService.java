@@ -10,15 +10,21 @@ import java.net.http.HttpResponse.BodyHandlers;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.bosta.request.delivery.Delivery;
+import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 class DeliveryService {
 	String apiKey;
 	HttpClient client;
+	private ObjectMapper objectMapper;
 
 	public DeliveryService(String apiKey) {
+		this.objectMapper = new ObjectMapper();
+		this.objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+		this.objectMapper.setSerializationInclusion(Include.NON_NULL);
 		this.apiKey = apiKey;
 		this.client = HttpClient.newHttpClient();
 	}
@@ -43,11 +49,8 @@ class DeliveryService {
 		} 
 	}
 
-	public void create(Delivery delivery) {
+	public CreateDeliveryResponse create(Delivery delivery) throws Exception {
 		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-			objectMapper.setSerializationInclusion(Include.NON_NULL);
 			String requestBody = objectMapper
 					.writeValueAsString(delivery);
 			HttpRequest request = HttpRequest.newBuilder(
@@ -57,15 +60,15 @@ class DeliveryService {
 					.header("Authorization", apiKey)
 					.POST(BodyPublishers.ofString(requestBody))
 					.build();
-			System.out.println("REQUEST");
-			System.out.println(requestBody);
 			HttpResponse<String> response = 
 					client.send(request, BodyHandlers.ofString());
-			System.out.println(response.body());
-
+			// parse JSON
+			CreateDeliveryResponse createDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<CreateDeliveryResponse>() {});
+			return createDeliveryResponse;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new Exception(e.getMessage());
 		}
 	}
 
