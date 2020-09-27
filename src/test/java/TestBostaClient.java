@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 import com.bosta.BostaClient;
 import com.bosta.enums.DeliveryType;
-import com.bosta.request.delivery.Delivery;
+import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.DropOffAddress;
 import com.bosta.request.delivery.PackageDetails;
 import com.bosta.request.delivery.Receiver;
@@ -14,7 +14,11 @@ public class TestBostaClient {
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
-		client.getDelivery("6849119");
+		try {
+			client.getDelivery("6849119");
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
 		/*
 		Receiver receiver = new Receiver
 				.Builder("first name", "last name", "01010187373").build();

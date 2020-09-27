@@ -9,11 +9,11 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.bosta.request.delivery.Delivery;
+import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
+import com.bosta.response.delivery.GetDeliveryResponse;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 class DeliveryService {
@@ -29,7 +29,7 @@ class DeliveryService {
 		this.client = HttpClient.newHttpClient();
 	}
 
-	public void get(String trackingNumber) {
+	public GetDeliveryResponse get(String trackingNumber)throws Exception {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
@@ -41,15 +41,19 @@ class DeliveryService {
 
 			HttpResponse<String> response = 
 					client.send(request, BodyHandlers.ofString());
-			System.out.println(response.body());
+			// parse JSON
+			GetDeliveryResponse getDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<GetDeliveryResponse>() {});
+			System.out.println(getDeliveryResponse.getMessage());
+			return getDeliveryResponse;
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new Exception(e.getMessage());
 		} 
 	}
 
-	public CreateDeliveryResponse create(Delivery delivery) throws Exception {
+	public CreateDeliveryResponse create(CreateDeliveryRequest delivery) throws Exception {
 		try {
 			String requestBody = objectMapper
 					.writeValueAsString(delivery);

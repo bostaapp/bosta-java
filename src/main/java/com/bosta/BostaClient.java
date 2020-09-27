@@ -1,7 +1,8 @@
 package com.bosta;
 
-import com.bosta.request.delivery.Delivery;
+import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
+import com.bosta.response.delivery.GetDeliveryResponse;
 
 public class BostaClient {
 	String apiKey;
@@ -15,15 +16,19 @@ public class BostaClient {
 		this.pickup = new PickupService(apiKey);
 	}
 
-	public void getDelivery(String trackingNumber) {
-		this.delivery.get(trackingNumber);
+	public GetDeliveryResponse getDelivery(String trackingNumber) throws Exception {
+		try {
+			return this.delivery.get(trackingNumber);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 	public void listDeliveries() {
 		this.delivery.list();
 	}
 
-	public CreateDeliveryResponse createDelivery(Delivery delivery) throws Exception {
+	public CreateDeliveryResponse createDelivery(CreateDeliveryRequest delivery) throws Exception {
 		try {
 			return this.delivery.create(delivery);
 		} catch (Exception e) {

@@ -6,7 +6,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 import com.bosta.enums.DeliveryType;
 
-public class Delivery {
+public class CreateDeliveryRequest {
 
 	private @NotNull int type;
 	private Specs specs;
@@ -17,7 +17,7 @@ public class Delivery {
 	private @NotNull Receiver receiver;
 	private String webhookUrl;
 
-	private Delivery(Builder builder) {
+	private CreateDeliveryRequest(Builder builder) {
 		this.type = builder.type.getValue();
 		this.specs = builder.specs;
 		this.notes = builder.notes;
@@ -68,8 +68,8 @@ public class Delivery {
 			this.webhookUrl = webhookUrl;
 			return this;
 		}
-		public Delivery build() {
-			return new Delivery(this);
+		public CreateDeliveryRequest build() {
+			return new CreateDeliveryRequest(this);
 		}
 	}
 }
