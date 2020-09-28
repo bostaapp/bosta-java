@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
+import com.bosta.response.delivery.DeliveryTrackingResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
 import com.bosta.response.delivery.UpdateDeliveryResponse;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -148,7 +149,27 @@ class DeliveryService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
+	public DeliveryTrackingResponse tracking(String deliveryId) throws Exception {
+		try {
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v1/deliveries/%s/tracking", 
+							deliveryId)))
+					.header("accept", "application/json")
+					.header("Authorization", apiKey)
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			// parse JSON
+			DeliveryTrackingResponse deliveryTrackingResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<DeliveryTrackingResponse>() {});
+			return deliveryTrackingResponse;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 	public void list() {}
 
 

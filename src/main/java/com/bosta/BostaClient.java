@@ -3,6 +3,7 @@ package com.bosta;
 import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
+import com.bosta.response.delivery.DeliveryTrackingResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
 import com.bosta.response.delivery.UpdateDeliveryResponse;
 
@@ -57,6 +58,14 @@ public class BostaClient {
 	public UpdateDeliveryResponse getDeliveryAwb(String deliveryId) throws Exception {
 		try {
 			return this.delivery.awp(deliveryId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public DeliveryTrackingResponse getDeliveryTracking(String deliveryId) throws Exception {
+		try {
+			return this.delivery.tracking(deliveryId);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

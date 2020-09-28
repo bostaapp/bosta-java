@@ -17,6 +17,14 @@ public class TestBostaClient {
 	public void testBostaClient() {
 	}
 	
+	public void testGetDeliveryTracking() {
+		try {
+			client.getDeliveryTracking("8C-4g4wA5G");
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+	
 	public void testGetDeliveryAwb() {
 		try {
 			client.getDeliveryAwb("8C-4g4wA5G");
