@@ -15,7 +15,15 @@ public class TestBostaClient {
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
-		testUpdateDelivery();
+		testTerminateDelivery();
+	}
+	
+	public void testTerminateDelivery() {
+		try {
+			client.terminateDelivery("CxQe6vcxe7");
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
 	}
 
 	public void testUpdateDelivery() {
@@ -25,7 +33,7 @@ public class TestBostaClient {
 					.businessReference("55555555")
 					.webhookUrl("https://www.google.com/test")
 					.build();
-			client.UpdateDelivery(delivery, "T7Sev1-rwN");
+			client.updateDelivery(delivery, "T7Sev1-rwN");
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}

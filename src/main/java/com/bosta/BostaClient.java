@@ -38,9 +38,17 @@ public class BostaClient {
 		}
 	}
 	
-	public UpdateDeliveryResponse UpdateDelivery(UpdateDeliveryRequest delivery, String deliveryId) throws Exception {
+	public UpdateDeliveryResponse updateDelivery(UpdateDeliveryRequest delivery, String deliveryId) throws Exception {
 		try {
 			return this.delivery.update(delivery, deliveryId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public UpdateDeliveryResponse terminateDelivery(String deliveryId) throws Exception {
+		try {
+			return this.delivery.terminate(deliveryId);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

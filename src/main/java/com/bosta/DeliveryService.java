@@ -93,7 +93,6 @@ class DeliveryService {
 					.build();
 			HttpResponse<String> response = 
 					client.send(request, BodyHandlers.ofString());
-			System.out.println(response.body());
 			// parse JSON
 			UpdateDeliveryResponse updateDeliveryResponse = 
 					objectMapper.readValue(response.body(), 
@@ -105,6 +104,31 @@ class DeliveryService {
 		}
 	}
 
+	public UpdateDeliveryResponse terminate(String deliveryId) throws Exception {
+		try {
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v1/deliveries/%s", 
+							deliveryId)))
+					.header("accept", "application/json")
+					.header("Content-Type", "application/json")
+					.header("Authorization", apiKey)
+					.DELETE()
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			// parse JSON
+			 UpdateDeliveryResponse updateDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<UpdateDeliveryResponse>() {});
+			return updateDeliveryResponse;
+			
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	public void list() {}
 
 
