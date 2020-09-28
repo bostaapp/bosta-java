@@ -5,6 +5,7 @@ import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.bosta.response.delivery.DeliveryTrackingResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
+import com.bosta.response.delivery.ListDeliveryResponse;
 import com.bosta.response.delivery.UpdateDeliveryResponse;
 
 public class BostaClient {
@@ -27,10 +28,6 @@ public class BostaClient {
 		}
 	}
 
-	public void listDeliveries() {
-		this.delivery.list();
-	}
-
 	public CreateDeliveryResponse createDelivery(CreateDeliveryRequest delivery) throws Exception {
 		try {
 			return this.delivery.create(delivery);
@@ -38,7 +35,7 @@ public class BostaClient {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public UpdateDeliveryResponse updateDelivery(UpdateDeliveryRequest delivery, String deliveryId) throws Exception {
 		try {
 			return this.delivery.update(delivery, deliveryId);
@@ -46,7 +43,7 @@ public class BostaClient {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public UpdateDeliveryResponse terminateDelivery(String deliveryId) throws Exception {
 		try {
 			return this.delivery.terminate(deliveryId);
@@ -54,7 +51,7 @@ public class BostaClient {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public UpdateDeliveryResponse getDeliveryAwb(String deliveryId) throws Exception {
 		try {
 			return this.delivery.awp(deliveryId);
@@ -62,10 +59,26 @@ public class BostaClient {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public DeliveryTrackingResponse getDeliveryTracking(String deliveryId) throws Exception {
 		try {
 			return this.delivery.tracking(deliveryId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public ListDeliveryResponse listDeliveries() throws Exception{
+		try {
+			return this.delivery.list();
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public ListDeliveryResponse listDeliveries(int perPage, int page) throws Exception{
+		try {
+			return this.delivery.list(perPage, page);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

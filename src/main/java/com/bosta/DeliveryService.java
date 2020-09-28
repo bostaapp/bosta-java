@@ -14,6 +14,7 @@ import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.bosta.response.delivery.DeliveryTrackingResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
+import com.bosta.response.delivery.ListDeliveryResponse;
 import com.bosta.response.delivery.UpdateDeliveryResponse;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -170,7 +171,45 @@ class DeliveryService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	public void list() {}
+	public ListDeliveryResponse list() throws Exception{
+		try {
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v0/deliveries")))
+					.header("accept", "application/json")
+					.header("Authorization", apiKey)
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			// parse JSON
+			ListDeliveryResponse listDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<ListDeliveryResponse>() {});
+			return listDeliveryResponse;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public ListDeliveryResponse list(int perPage, int page) throws Exception{
+		try {
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v0/deliveries?perPage=%d&page=%d", perPage, page)))
+					.header("accept", "application/json")
+					.header("Authorization", apiKey)
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			// parse JSON
+			ListDeliveryResponse listDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<ListDeliveryResponse>() {});
+			return listDeliveryResponse;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 
 
 }
