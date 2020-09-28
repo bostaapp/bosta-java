@@ -1,8 +1,10 @@
 package com.bosta;
 
 import com.bosta.request.delivery.CreateDeliveryRequest;
+import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
+import com.bosta.response.delivery.UpdateDeliveryResponse;
 
 public class BostaClient {
 	String apiKey;
@@ -31,6 +33,14 @@ public class BostaClient {
 	public CreateDeliveryResponse createDelivery(CreateDeliveryRequest delivery) throws Exception {
 		try {
 			return this.delivery.create(delivery);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public UpdateDeliveryResponse UpdateDelivery(UpdateDeliveryRequest delivery, String deliveryId) throws Exception {
+		try {
+			return this.delivery.update(delivery, deliveryId);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

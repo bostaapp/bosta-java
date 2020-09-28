@@ -8,18 +8,38 @@ import com.bosta.request.delivery.DropOffAddress;
 import com.bosta.request.delivery.PackageDetails;
 import com.bosta.request.delivery.Receiver;
 import com.bosta.request.delivery.Specs;
+import com.bosta.request.delivery.UpdateDeliveryRequest;
 
 public class TestBostaClient {
 	BostaClient client = 
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
+		testUpdateDelivery();
+	}
+
+	public void testUpdateDelivery() {
+		try {
+			UpdateDeliveryRequest delivery = new UpdateDeliveryRequest.Builder()
+					.notes("Notes test")
+					.businessReference("55555555")
+					.webhookUrl("https://www.google.com/test")
+					.build();
+			client.UpdateDelivery(delivery, "T7Sev1-rwN");
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+
+	public void testGetDelivery() {
 		try {
 			client.getDelivery("6849119");
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
-		/*
+	}
+
+	public void testCreateDelivery() {
 		Receiver receiver = new Receiver
 				.Builder("first name", "last name", "01010187373").build();
 		PackageDetails packageDetails = new PackageDetails.Builder()
@@ -41,19 +61,18 @@ public class TestBostaClient {
 				.floor("12")
 				.apartment("12")
 				.build();
-		Delivery delivery = new Delivery.Builder(DeliveryType.SEND, 500, receiver)
+		CreateDeliveryRequest delivery = new CreateDeliveryRequest.Builder(DeliveryType.SEND, 500, receiver)
 				.dropOffAddress(dropOffAddress)
 				.specs(specs).notes("Notes")
 				.businessReference("13123123")
 				.webhookUrl("https://www.google.com/")
 				.build();
-		
+
 		try {
 			client.createDelivery(delivery);
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
-		*/
 	}
 
 }

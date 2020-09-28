@@ -10,8 +10,10 @@ import java.net.http.HttpResponse.BodyHandlers;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.bosta.request.delivery.CreateDeliveryRequest;
+import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
+import com.bosta.response.delivery.UpdateDeliveryResponse;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -71,6 +73,33 @@ class DeliveryService {
 					objectMapper.readValue(response.body(), 
 							new TypeReference<CreateDeliveryResponse>() {});
 			return createDeliveryResponse;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+
+	public UpdateDeliveryResponse update(UpdateDeliveryRequest delivery, String deliveryId) throws Exception {
+		try {
+			String requestBody = objectMapper
+					.writeValueAsString(delivery);
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v1/deliveries/%s", 
+							deliveryId)))
+					.header("accept", "application/json")
+					.header("Content-Type", "application/json")
+					.header("Authorization", apiKey)
+					.PUT(BodyPublishers.ofString(requestBody))
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			System.out.println(response.body());
+			// parse JSON
+			UpdateDeliveryResponse updateDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<UpdateDeliveryResponse>() {});
+			return updateDeliveryResponse;
+			
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
