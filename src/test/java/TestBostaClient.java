@@ -15,7 +15,14 @@ public class TestBostaClient {
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
-		testTerminateDelivery();
+	}
+	
+	public void testGetDeliveryAwb() {
+		try {
+			client.getDeliveryAwb("8C-4g4wA5G");
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
 	}
 	
 	public void testTerminateDelivery() {

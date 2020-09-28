@@ -53,6 +53,14 @@ public class BostaClient {
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	public UpdateDeliveryResponse getDeliveryAwb(String deliveryId) throws Exception {
+		try {
+			return this.delivery.awp(deliveryId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 
 	public void listPickups() {
 		this.pickup.list();

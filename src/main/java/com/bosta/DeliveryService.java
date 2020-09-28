@@ -122,8 +122,28 @@ class DeliveryService {
 					objectMapper.readValue(response.body(), 
 							new TypeReference<UpdateDeliveryResponse>() {});
 			return updateDeliveryResponse;
-			
-			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public UpdateDeliveryResponse awp(String deliveryId) throws Exception {
+		try {
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v1/deliveries/awb/%s", 
+							deliveryId)))
+					.header("accept", "application/json")
+					.header("Authorization", apiKey)
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			System.out.println(response.body());
+			// parse JSON
+			 UpdateDeliveryResponse updateDeliveryResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<UpdateDeliveryResponse>() {});
+			return updateDeliveryResponse;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
