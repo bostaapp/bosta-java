@@ -1,8 +1,11 @@
 package com.bosta.response.delivery;
 
+import com.bosta.common.City;
+import com.bosta.common.Zone;
+
 public class GetDeliveryDropOffAddress {
-	GetDeliveryCity CityObject;
-	GetDeliveryZone ZoneObject;
+	City CityObject;
+	Zone ZoneObject;
 	private String district;
 	private String firstLine;
 	private String secondLine;
@@ -13,11 +16,11 @@ public class GetDeliveryDropOffAddress {
 
 	// Getter Methods 
 
-	public GetDeliveryCity getCity() {
+	public City getCity() {
 		return CityObject;
 	}
 
-	public GetDeliveryZone getZone() {
+	public Zone getZone() {
 		return ZoneObject;
 	}
 
@@ -47,11 +50,11 @@ public class GetDeliveryDropOffAddress {
 
 	// Setter Methods 
 
-	public void setCity(GetDeliveryCity cityObject) {
+	public void setCity(City cityObject) {
 		this.CityObject = cityObject;
 	}
 
-	public void setZone(GetDeliveryZone zoneObject) {
+	public void setZone(Zone zoneObject) {
 		this.ZoneObject = zoneObject;
 	}
 

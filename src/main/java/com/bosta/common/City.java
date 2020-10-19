@@ -1,6 +1,6 @@
-package com.bosta.response.delivery;
+package com.bosta.common;
 
-public class GetDeliveryCity {
+public class City {
 	private String _id;
 	private String name;
 

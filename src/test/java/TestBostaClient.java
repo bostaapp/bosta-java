@@ -1,14 +1,19 @@
+import java.util.Date;
+
 import org.testng.annotations.Test;
 
 
 import com.bosta.BostaClient;
+import com.bosta.common.ContactPerson;
 import com.bosta.enums.DeliveryType;
+import com.bosta.enums.ScheduledTimeSlot;
 import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.DropOffAddress;
 import com.bosta.request.delivery.PackageDetails;
 import com.bosta.request.delivery.Receiver;
 import com.bosta.request.delivery.Specs;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
+import com.bosta.request.pickup.CreatePickupRequest;
 
 public class TestBostaClient {
 	BostaClient client = 
@@ -16,7 +21,7 @@ public class TestBostaClient {
 	@Test
 	public void testBostaClient() {
 	}
-	
+
 	public void testListDeliveries(int perPage, int page) {
 		try {
 			client.listDeliveries(perPage, page);
@@ -24,7 +29,7 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public void testListDeliveries() {
 		try {
 			client.listDeliveries();
@@ -32,7 +37,7 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public void testGetDeliveryTracking() {
 		try {
 			client.getDeliveryTracking("8C-4g4wA5G");
@@ -40,7 +45,7 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public void testGetDeliveryAwb() {
 		try {
 			client.getDeliveryAwb("8C-4g4wA5G");
@@ -48,7 +53,7 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public void testTerminateDelivery() {
 		try {
 			client.terminateDelivery("CxQe6vcxe7");
@@ -114,4 +119,23 @@ public class TestBostaClient {
 		}
 	}
 
+	public void testCreatePickup() {
+		ContactPerson contactPerson = new ContactPerson
+				.Builder()
+				.email("test@email.coom")
+				.name("Test name")
+				.phone("01001001000")
+				.build();
+
+		CreatePickupRequest createPickupRequest = new CreatePickupRequest
+				.Builder(new Date("Mon Nov 4 2020 00:00:00 GMT+0200"),ScheduledTimeSlot.FROM_10_TO_13)
+				.notes("Test")
+				.contactPerson(contactPerson)
+				.build();
+		try {
+			client.createPickup(createPickupRequest);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
 }

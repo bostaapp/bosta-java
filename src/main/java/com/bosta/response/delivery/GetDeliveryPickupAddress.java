@@ -1,7 +1,9 @@
 package com.bosta.response.delivery;
 
+import com.bosta.common.City;
+
 public class GetDeliveryPickupAddress {
-	GetDeliveryCity CityObject;
+	City CityObject;
 	private String district;
 	private String firstLine;
 	private float floor;
@@ -11,7 +13,7 @@ public class GetDeliveryPickupAddress {
 
 	// Getter Methods 
 
-	public GetDeliveryCity getCity() {
+	public City getCity() {
 		return CityObject;
 	}
 
@@ -37,7 +39,7 @@ public class GetDeliveryPickupAddress {
 
 	// Setter Methods 
 
-	public void setCity(GetDeliveryCity cityObject) {
+	public void setCity(City cityObject) {
 		this.CityObject = cityObject;
 	}
 

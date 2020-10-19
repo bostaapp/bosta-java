@@ -1,6 +1,6 @@
-package com.bosta.response.delivery;
+package com.bosta.common;
 
-public class GetDeliveryZone {
+public class Zone {
 	private String _id;
 	private String name;
 

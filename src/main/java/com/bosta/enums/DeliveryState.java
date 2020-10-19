@@ -35,6 +35,6 @@ public enum DeliveryState {
 
 	public String getVal() {
 		return val;
-	}
+	}	
 
 }
