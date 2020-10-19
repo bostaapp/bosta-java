@@ -9,6 +9,7 @@ import com.bosta.response.delivery.GetDeliveryResponse;
 import com.bosta.response.delivery.ListDeliveryResponse;
 import com.bosta.response.delivery.UpdateDeliveryResponse;
 import com.bosta.response.pickup.CreatePickupResponse;
+import com.bosta.response.pickup.ListPickupResponse;
 
 public class BostaClient {
 	String apiKey;
@@ -86,8 +87,12 @@ public class BostaClient {
 		}
 	}
 
-	public void listPickups() {
-		this.pickup.list();
+	public ListPickupResponse listPickups(int pageId)  throws Exception{
+		try {
+			return this.pickup.list(pageId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 	public CreatePickupResponse createPickup(CreatePickupRequest createPickupRequest) throws Exception {
