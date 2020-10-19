@@ -2,7 +2,7 @@ package com.bosta.response.pickup;
 
 import java.util.ArrayList;
 
-public class Message {
+public class CreatePickupResponseData {
 	private String type;
 	private String scheduledDate;
 	private String scheduledTimeSlot;

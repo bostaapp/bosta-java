@@ -128,7 +128,7 @@ public class TestBostaClient {
 				.build();
 
 		CreatePickupRequest createPickupRequest = new CreatePickupRequest
-				.Builder(new Date("Mon Nov 4 2020 00:00:00 GMT+0200"),ScheduledTimeSlot.FROM_10_TO_13)
+				.Builder(new Date("Mon Nov 9 2020 00:00:00 GMT+0200"),ScheduledTimeSlot.FROM_10_TO_13)
 				.notes("Test")
 				.contactPerson(contactPerson)
 				.build();

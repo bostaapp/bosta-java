@@ -1,16 +1,35 @@
 package com.bosta.response.pickup;
 
 public class CreatePickupResponse {
-	 Message MessageObject;
+	 private boolean success;
+	 private String message;
+	 CreatePickupResponseData DataObject;
 
 	 // Getter Methods 
-	 public Message getMessage() {
-	  return MessageObject;
+
+	 public boolean getSuccess() {
+	  return success;
+	 }
+
+	 public String getMessage() {
+	  return message;
+	 }
+
+	 public CreatePickupResponseData getData() {
+	  return DataObject;
 	 }
 
 	 // Setter Methods 
 
-	 public void setMessage(Message messageObject) {
-	  this.MessageObject = messageObject;
+	 public void setSuccess(boolean success) {
+	  this.success = success;
+	 }
+
+	 public void setMessage(String message) {
+	  this.message = message;
+	 }
+
+	 public void setData(CreatePickupResponseData dataObject) {
+	  this.DataObject = dataObject;
 	 }
 }
