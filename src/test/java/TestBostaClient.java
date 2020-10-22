@@ -21,7 +21,6 @@ public class TestBostaClient {
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
-		testUpdatePickup();
 	}
 
 	public void testListDeliveries(int perPage, int page) {
