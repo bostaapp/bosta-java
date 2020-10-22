@@ -9,9 +9,11 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 
 import com.bosta.request.pickup.CreatePickupRequest;
+import com.bosta.request.pickup.UpdatePickupRequest;
 import com.bosta.response.pickup.CreatePickupResponse;
 import com.bosta.response.pickup.GetPickupDetailsResponse;
 import com.bosta.response.pickup.ListPickupResponse;
+import com.bosta.response.pickup.UpdatePickupResponse;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -95,6 +97,31 @@ class PickupService {
 							new TypeReference<GetPickupDetailsResponse>() {});
 			return getPickupDetailsResponse;
 
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public UpdatePickupResponse update(UpdatePickupRequest updatePickupRequest, String pickupId)throws Exception {
+		try {
+			String requestBody = objectMapper
+					.writeValueAsString(updatePickupRequest);
+			HttpRequest request = HttpRequest.newBuilder(
+					URI.create(String.format(
+							"https://stg-app.bosta.co/api/v1/pickups/%s", 
+							pickupId)))
+					.header("accept", "application/json")
+					.header("Content-Type", "application/json")
+					.header("Authorization", apiKey)
+					.PUT(BodyPublishers.ofString(requestBody))
+					.build();
+			HttpResponse<String> response = 
+					client.send(request, BodyHandlers.ofString());
+			// parse JSON
+			UpdatePickupResponse updatePickupResponse = 
+					objectMapper.readValue(response.body(), 
+							new TypeReference<UpdatePickupResponse>() {});
+			return updatePickupResponse;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

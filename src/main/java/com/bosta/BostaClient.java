@@ -3,6 +3,7 @@ package com.bosta;
 import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.request.pickup.CreatePickupRequest;
+import com.bosta.request.pickup.UpdatePickupRequest;
 import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.bosta.response.delivery.DeliveryTrackingResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
@@ -11,6 +12,7 @@ import com.bosta.response.delivery.UpdateDeliveryResponse;
 import com.bosta.response.pickup.CreatePickupResponse;
 import com.bosta.response.pickup.GetPickupDetailsResponse;
 import com.bosta.response.pickup.ListPickupResponse;
+import com.bosta.response.pickup.UpdatePickupResponse;
 
 public class BostaClient {
 	String apiKey;
@@ -112,4 +114,11 @@ public class BostaClient {
 		}
 	}
 
+	public UpdatePickupResponse updatePickup(UpdatePickupRequest updatePickupRequest, String pickupId) throws Exception {
+		try {
+			return this.pickup.update(updatePickupRequest, pickupId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 }

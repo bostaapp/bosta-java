@@ -14,12 +14,14 @@ import com.bosta.request.delivery.Receiver;
 import com.bosta.request.delivery.Specs;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.request.pickup.CreatePickupRequest;
+import com.bosta.request.pickup.UpdatePickupRequest;
 
 public class TestBostaClient {
 	BostaClient client = 
 			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
 	@Test
 	public void testBostaClient() {
+		testUpdatePickup();
 	}
 
 	public void testListDeliveries(int perPage, int page) {
@@ -150,6 +152,26 @@ public class TestBostaClient {
 	public void testGetPickup(String pickupId) {
 		try {
 			client.getPickup(pickupId);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+	
+	public void testUpdatePickup() {
+		ContactPerson contactPerson = new ContactPerson
+				.Builder()
+				.email("test@email.coom")
+				.name("Test name")
+				.phone("01001001000")
+				.build();
+
+		UpdatePickupRequest updatePickupRequest = new UpdatePickupRequest
+				.Builder()
+				.notes("Test update")
+				.contactPerson(contactPerson)
+				.build();
+		try {
+			client.updatePickup(updatePickupRequest, "070000000349");
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
