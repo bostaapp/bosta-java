@@ -138,10 +138,18 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public void testListPickups(int pageId) {
 		try {
 			client.listPickups(pageId);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+
+	public void testGetPickup(String pickupId) {
+		try {
+			client.getPickup(pickupId);
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
