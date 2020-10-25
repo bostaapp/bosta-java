@@ -22,12 +22,24 @@ public class Receiver {
 		private String phone;
 		private String email;
 
-		public Builder(String firstName, String lastName, String phone) { // The mandatory parameters are set here
+		/**
+		* Creates new receiver.
+		* 
+		* @param firstName  Receiver first name.
+		* @param lastName  Receiver last name.
+		* @param phone  Receiver phone.
+		*/
+		public Builder(String firstName, String lastName, String phone) {
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.phone = phone;
 		}
 
+		/**
+		* Sets receiver email.
+		* 
+		* @param email  Receiver email.
+		*/
 		public Builder email(String email) {
 			this.email = email;
 			return this;

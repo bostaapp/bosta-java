@@ -30,37 +30,88 @@ public class DropOffAddress {
 		private String floor;
 		private String apartment;
 
-		public Builder() { // The mandatory parameters are set here
+		/**
+		* Creates new dropOff address.
+		* 
+		*/
+		public Builder() {
 		}
 
+		/**
+		* Sets dropOff address city.
+		* 
+		* @param city  DropOff address city.
+		*/
 		public Builder city(String city) {
 			this.city = city;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address zone.
+		* 
+		* @param zone  DropOff address zone.
+		*/
 		public Builder zone(String zone) {
 			this.zone = zone;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address district.
+		* 
+		* @param district  DropOff address district.
+		*/
 		public Builder district(String district) {
 			this.district = district;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address firstLine.
+		* 
+		* @param firstLine  DropOff address firstLine.
+		*/
 		public Builder firstLine(String firstLine) {
 			this.firstLine = firstLine;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address secondLine.
+		* 
+		* @param secondLine  DropOff address secondLine.
+		*/
 		public Builder secondLine(String secondLine) {
 			this.secondLine = secondLine;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address buildingNumber.
+		* 
+		* @param buildingNumber  DropOff address buildingNumber.
+		*/
 		public Builder buildingNumber(String buildingNumber) {
 			this.buildingNumber = buildingNumber;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address floor.
+		* 
+		* @param floor  DropOff address floor.
+		*/
 		public Builder floor(String floor) {
 			this.floor = floor;
 			return this;
 		}
+		
+		/**
+		* Sets dropOff address apartment.
+		* 
+		* @param apartment  DropOff address apartment.
+		*/
 		public Builder apartment(String apartment) {
 			this.apartment = apartment;
 			return this;

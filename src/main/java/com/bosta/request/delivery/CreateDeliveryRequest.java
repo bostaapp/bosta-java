@@ -38,36 +38,69 @@ public class CreateDeliveryRequest {
 		private Receiver receiver;
 		private String webhookUrl;
 
+		/**
+		* Creates new delivery
+		* 
+		* @param type  Delivery type.
+		* @param cod  Cash on delivery.
+		* @param receiver  Delivery receiver.
+		*/
 		public Builder(DeliveryType type, float cod, Receiver receiver) { // The mandatory parameters are set here
 			this.type = type;
 			this.cod = cod;
 			this.receiver = receiver;
 		}
 
+		/**
+		* Sets delivery specifications.
+		* 
+		* @param specs  Delivery specifications.
+		*/
 		public Builder specs(Specs specs) {
 			this.specs = specs;
 			return this;
 		}
 
+		/**
+		* Sets delivery notes.
+		* 
+		* @param notes  Delivery notes.
+		*/
 		public Builder notes(String notes) {
 			this.notes = notes;
 			return this;
 		}
 
+		/**
+		* Sets delivery dropOffAddress.
+		* 
+		* @param dropOffAddress  Delivery dropOffAddress.
+		*/
 		public Builder dropOffAddress(DropOffAddress dropOffAddress) {
 			this.dropOffAddress = dropOffAddress;
 			return this;
 		}
 
+		/**
+		* Sets delivery business reference.
+		* 
+		* @param businessReference  Delivery business reference.
+		*/
 		public Builder businessReference(String businessReference) {
 			this.businessReference = businessReference;
 			return this;
 		}
 
+		/**
+		* Sets delivery webhook URL.
+		* 
+		* @param webhookUrl  Delivery webhook URL.
+		*/
 		public Builder webhookUrl(String webhookUrl) {
 			this.webhookUrl = webhookUrl;
 			return this;
 		}
+		
 		public CreateDeliveryRequest build() {
 			return new CreateDeliveryRequest(this);
 		}

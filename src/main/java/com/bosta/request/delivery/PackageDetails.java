@@ -19,19 +19,38 @@ public class PackageDetails {
 			private String document;
 			private String description;
 
-			public Builder() { // The mandatory parameters are set here
+			/**
+			* Creates new Package details.
+			* 
+			*/
+			public Builder() {
 			}
 
+			/**
+			* Sets Package details items count.
+			* 
+			* @param itemsCount Package details items count.
+			*/
 			public Builder itemsCount(int itemsCount) {
 				this.itemsCount = itemsCount;
 				return this;
 			}
 			
+			/**
+			* Sets Package details document.
+			* 
+			* @param document Package details document.
+			*/
 			public Builder document(String document) {
 				this.document = document;
 				return this;
 			}
 			
+			/**
+			* Sets Package details description.
+			* 
+			* @param description Package details description.
+			*/
 			public Builder description(String description) {
 				this.description = description;
 				return this;

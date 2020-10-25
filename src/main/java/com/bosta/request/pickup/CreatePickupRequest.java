@@ -29,21 +29,42 @@ public class CreatePickupRequest {
 		private ScheduledTimeSlot scheduledTimeSlot;
 		private ContactPerson contactPerson;
 
+		/**
+		* Creates new pickup request.
+		* 
+		* @param scheduledDate  Pickup request scheduled date.
+		* @param scheduledTimeSlot  Pickup request scheduled time slot.
+		*/
 		public Builder(Date scheduledDate, ScheduledTimeSlot scheduledTimeSlot) { // The mandatory parameters are set here
 			this.scheduledDate = scheduledDate;
 			this.scheduledTimeSlot = scheduledTimeSlot;
 		}
 		
+		/**
+		* Sets pickup request business location Id.
+		* 
+		* @param businessLocationId  Pickup request business location Id.
+		*/
 		public Builder businessLocationId(String businessLocationId) {
 			this.businessLocationId = businessLocationId;
 			return this;
 		}
 		
+		/**
+		* Sets pickup request notes.
+		* 
+		* @param notes  Pickup request city notes.
+		*/
 		public Builder notes(String notes) {
 			this.notes = notes;
 			return this;
 		}
 
+		/**
+		* Sets pickup request contact person.
+		* 
+		* @param contactPerson  Pickup request contact person.
+		*/
 		public Builder contactPerson(ContactPerson contactPerson) {
 			this.contactPerson = contactPerson;
 			return this;
