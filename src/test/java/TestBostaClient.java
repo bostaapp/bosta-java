@@ -176,4 +176,28 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
+	
+	public void testListCites(int per, int page) {
+		try {
+			client.listCities(per, page);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+	
+	public void testListCites() {
+		try {
+			client.listCities();
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
+	
+	public void testListCityzones(String cityId) {
+		try {
+			client.listCityZones(cityId);
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+	}
 }

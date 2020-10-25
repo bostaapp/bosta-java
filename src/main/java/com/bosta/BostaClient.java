@@ -5,6 +5,7 @@ import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.request.pickup.CreatePickupRequest;
 import com.bosta.request.pickup.UpdatePickupRequest;
+import com.bosta.response.city.ListCityResponse;
 import com.bosta.response.delivery.CreateDeliveryResponse;
 import com.bosta.response.delivery.DeliveryTrackingResponse;
 import com.bosta.response.delivery.GetDeliveryResponse;
@@ -23,10 +24,12 @@ public class BostaClient {
 	String apiKey;
 	DeliveryService delivery;
 	PickupService pickup;
+	CityService city;
 	
 	private void initialize(String apiKey, String baseUrl){
 		this.delivery = new DeliveryService(apiKey, baseUrl);
 		this.pickup = new PickupService(apiKey, baseUrl);
+		this.city = new CityService(baseUrl);
 	}
 
 	/**
@@ -225,6 +228,48 @@ public class BostaClient {
 	public UpdatePickupResponse updatePickup(UpdatePickupRequest pickupRequest, String pickupId) throws Exception {
 		try {
 			return this.pickup.update(pickupRequest, pickupId);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	* Returns a list of cities.
+	*
+	* @param  per The returned items per page.
+	* @param  page The page number(started from 1).
+	* 
+	* @return The result
+	*/
+	public ListCityResponse listCities(int per, int page) throws Exception{
+		try {
+			return this.city.list(per, page);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	* Returns a list of cities.
+	* 
+	* @return The result
+	*/
+	public ListCityResponse listCities() throws Exception{
+		try {
+			return this.city.list();
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	* Returns a list of zones per city.
+	* 
+	* @return The result
+	*/
+	public ListCityResponse listCityZones(String cityId) throws Exception{
+		try {
+			return this.city.listZones(cityId);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
