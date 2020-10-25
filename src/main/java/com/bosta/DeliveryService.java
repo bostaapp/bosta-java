@@ -20,6 +20,10 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+/**
+ * This class is for delivery services.
+ *
+ */
 class DeliveryService {
 	String apiKey;
 	String baseUrl;

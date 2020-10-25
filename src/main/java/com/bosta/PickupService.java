@@ -20,6 +20,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * This class is for pickup request services.
+ *
+ */
 class PickupService {
 	String apiKey;
 	String baseUrl;
