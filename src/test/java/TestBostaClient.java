@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.bosta.BostaClient;
 import com.bosta.common.ContactPerson;
 import com.bosta.enums.DeliveryType;
+import com.bosta.enums.EnvironmentOptions;
 import com.bosta.enums.ScheduledTimeSlot;
 import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.DropOffAddress;
@@ -18,7 +19,7 @@ import com.bosta.request.pickup.UpdatePickupRequest;
 
 public class TestBostaClient {
 	BostaClient client = 
-			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c");
+			new BostaClient("e0bef5cfcf2cb4051bc661fedf8f8ad328a23c151da6eb877cca3c", EnvironmentOptions.STAGING);
 	@Test
 	public void testBostaClient() {
 	}
@@ -155,7 +156,7 @@ public class TestBostaClient {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
+
 	public void testUpdatePickup() {
 		ContactPerson contactPerson = new ContactPerson
 				.Builder()

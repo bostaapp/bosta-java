@@ -22,14 +22,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 class DeliveryService {
 	String apiKey;
+	String baseUrl;
 	HttpClient client;
 	private ObjectMapper objectMapper;
 
-	public DeliveryService(String apiKey) {
+	public DeliveryService(String apiKey, String baseUrl) {
+		this.apiKey = apiKey;
+		this.baseUrl = baseUrl;
 		this.objectMapper = new ObjectMapper();
 		this.objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 		this.objectMapper.setSerializationInclusion(Include.NON_NULL);
-		this.apiKey = apiKey;
 		this.client = HttpClient.newHttpClient();
 	}
 
@@ -37,7 +39,7 @@ class DeliveryService {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/deliveries/%s", 
+							"%s/api/v1/deliveries/%s", this.baseUrl, 
 							trackingNumber)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
@@ -62,7 +64,8 @@ class DeliveryService {
 			String requestBody = objectMapper
 					.writeValueAsString(delivery);
 			HttpRequest request = HttpRequest.newBuilder(
-					URI.create("https://stg-app.bosta.co/api/v1/deliveries"))
+					URI.create(String.format(
+							"%s/api/v1/deliveries", this.baseUrl)))
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")
 					.header("Authorization", apiKey)
@@ -86,7 +89,7 @@ class DeliveryService {
 					.writeValueAsString(delivery);
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/deliveries/%s", 
+							"%s/api/v1/deliveries/%s", this.baseUrl, 
 							deliveryId)))
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")
@@ -100,7 +103,7 @@ class DeliveryService {
 					objectMapper.readValue(response.body(), 
 							new TypeReference<UpdateDeliveryResponse>() {});
 			return updateDeliveryResponse;
-			
+
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
@@ -110,7 +113,7 @@ class DeliveryService {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/deliveries/%s", 
+							"%s/api/v1/deliveries/%s", this.baseUrl, 
 							deliveryId)))
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")
@@ -120,7 +123,7 @@ class DeliveryService {
 			HttpResponse<String> response = 
 					client.send(request, BodyHandlers.ofString());
 			// parse JSON
-			 UpdateDeliveryResponse updateDeliveryResponse = 
+			UpdateDeliveryResponse updateDeliveryResponse = 
 					objectMapper.readValue(response.body(), 
 							new TypeReference<UpdateDeliveryResponse>() {});
 			return updateDeliveryResponse;
@@ -128,12 +131,12 @@ class DeliveryService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public UpdateDeliveryResponse awp(String deliveryId) throws Exception {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/deliveries/awb/%s", 
+							"%s/api/v1/deliveries/awb/%s", this.baseUrl, 
 							deliveryId)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
@@ -142,7 +145,7 @@ class DeliveryService {
 					client.send(request, BodyHandlers.ofString());
 			System.out.println(response.body());
 			// parse JSON
-			 UpdateDeliveryResponse updateDeliveryResponse = 
+			UpdateDeliveryResponse updateDeliveryResponse = 
 					objectMapper.readValue(response.body(), 
 							new TypeReference<UpdateDeliveryResponse>() {});
 			return updateDeliveryResponse;
@@ -155,7 +158,7 @@ class DeliveryService {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/deliveries/%s/tracking", 
+							"%s/api/v1/deliveries/%s/tracking", this.baseUrl, 
 							deliveryId)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
@@ -171,12 +174,12 @@ class DeliveryService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public ListDeliveryResponse list() throws Exception{
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v0/deliveries")))
+							"%s/api/v0/deliveries", this.baseUrl)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
 					.build();
@@ -191,12 +194,12 @@ class DeliveryService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public ListDeliveryResponse list(int perPage, int page) throws Exception{
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v0/deliveries?perPage=%d&page=%d", perPage, page)))
+							"%s/api/v0/deliveries?perPage=%d&page=%d", this.baseUrl, perPage, page)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
 					.build();

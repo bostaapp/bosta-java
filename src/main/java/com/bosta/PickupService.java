@@ -1,4 +1,4 @@
- 
+
 package com.bosta;
 
 import java.net.URI;
@@ -22,23 +22,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 class PickupService {
 	String apiKey;
+	String baseUrl;
 	HttpClient client;
 	private ObjectMapper objectMapper;
-	
-	public PickupService(String apiKey) {
+
+	public PickupService(String apiKey, String baseUrl) {
+		this.apiKey = apiKey;
+		this.baseUrl = baseUrl;
 		this.objectMapper = new ObjectMapper();
 		this.objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 		this.objectMapper.setSerializationInclusion(Include.NON_NULL);
-		this.apiKey = apiKey;
 		this.client = HttpClient.newHttpClient();
 	}
-	
+
 	public CreatePickupResponse create(CreatePickupRequest createPickupRequest)throws Exception {
 		try {
 			String requestBody = objectMapper
 					.writeValueAsString(createPickupRequest);
 			HttpRequest request = HttpRequest.newBuilder(
-					URI.create("https://stg-app.bosta.co/api/v1/pickups"))
+					URI.create(String.format(
+							"%s/api/v1/pickups", this.baseUrl)))
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")
 					.header("Authorization", apiKey)
@@ -55,12 +58,12 @@ class PickupService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public ListPickupResponse list(int pageId) throws Exception {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/pickups?pageId=%s", 
+							"%s/api/v1/pickups?pageId=%s", this.baseUrl,
 							pageId)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
@@ -83,7 +86,7 @@ class PickupService {
 		try {
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/pickups/%s", 
+							"%s/api/v1/pickups/%s", this.baseUrl, 
 							pickupId)))
 					.header("accept", "application/json")
 					.header("Authorization", apiKey)
@@ -101,14 +104,14 @@ class PickupService {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public UpdatePickupResponse update(UpdatePickupRequest updatePickupRequest, String pickupId)throws Exception {
 		try {
 			String requestBody = objectMapper
 					.writeValueAsString(updatePickupRequest);
 			HttpRequest request = HttpRequest.newBuilder(
 					URI.create(String.format(
-							"https://stg-app.bosta.co/api/v1/pickups/%s", 
+							"%s/api/v1/pickups/%s", this.baseUrl, 
 							pickupId)))
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")

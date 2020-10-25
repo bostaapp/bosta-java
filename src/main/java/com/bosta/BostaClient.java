@@ -1,5 +1,6 @@
 package com.bosta;
 
+import com.bosta.enums.EnvironmentOptions;
 import com.bosta.request.delivery.CreateDeliveryRequest;
 import com.bosta.request.delivery.UpdateDeliveryRequest;
 import com.bosta.request.pickup.CreatePickupRequest;
@@ -18,12 +19,25 @@ public class BostaClient {
 	String apiKey;
 	DeliveryService delivery;
 	PickupService pickup;
+	
+	private void initialize(String apiKey, String baseUrl){
+		this.delivery = new DeliveryService(apiKey, baseUrl);
+		this.pickup = new PickupService(apiKey, baseUrl);
+	}
 
-	//This is the constructor
+	@SuppressWarnings("unused")
+	private BostaClient() {
+		//not called
+	}
+
 	public BostaClient(String apiKey){
 		this.apiKey = apiKey;
-		this.delivery = new DeliveryService(apiKey);
-		this.pickup = new PickupService(apiKey);
+		initialize(apiKey, EnvironmentOptions.PRODUCTION.getVal());
+	}
+	
+	public BostaClient(String apiKey, EnvironmentOptions environmentOptions){
+		this.apiKey = apiKey;
+		initialize(apiKey, environmentOptions.getVal());
 	}
 
 	public GetDeliveryResponse getDelivery(String trackingNumber) throws Exception {
