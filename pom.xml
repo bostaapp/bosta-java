@@ -76,6 +76,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<!-- <configuration>
+					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+				</configuration> -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -129,7 +132,7 @@
 	</dependencies>
 
 	<properties>
-		<maven.compiler.source>1.11</maven.compiler.source>
+		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 </project>
